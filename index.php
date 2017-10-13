@@ -163,9 +163,16 @@ echo '</pre>';
 
 //var_dump($car);
 
+for ($i=0; $i <= 2 ; $i++) { 
+	echo '<br>CAR '.$car[$i]['name'].'<br>';
+	echo $car[$i]['model'].' '.$car[$i]['speed'].' '.$car[$i]['doors'].' '.$car[$i]['year'].'<br>';
+}
+
+/*
 echo '<br>CAR bmw<br>'.$bmw['model'].' '.$bmw['speed'].' '.$bmw['doors'].' '.$bmw['year'];
 echo '<br>CAR toyota<br>'.$toyota['model'].' '.$toyota['speed'].' '.$toyota['doors'].' '.$toyota['year']; 
 echo '<br>CAR opel<br>'.$opel['model'].' '.$opel['speed'].' '.$opel['doors'].' '.$opel['year']; 
+*/
 
 //Задание #7 
  
