@@ -42,7 +42,7 @@ echo '<br>Пытаюсь поменять константу: '.ASD;
  
 //-Создайте переменную $age 
 $age;
-//-Присвойте переменной $age произвольное числовое значение 
+//-Присвойте переменной $age произвольное числовое значение
 $age = mt_rand(0, 200);
 echo '<br><br>Сейчас случайное число = '.$age;
 //-Напишите   конструкцию   if,   которая   выводит   фразу:   “Вам   еще работать   и   работать”  при   условии   что   значение   переменной   //$age   попадает   в   диапазон   чисел   от   18   до   65  (включительно) 
@@ -171,9 +171,19 @@ echo '</pre>';
 //CAR bmw
 //X5 ­120 ­ 5 ­ 2015 
 
+echo '<b>Вариант 1</b>';
 foreach ($car as $key => $item) {
-    echo 'CAR '.$key.'<br>'.$car[$key]['model'].' '.$car[$key]['speed'].' '.$car[$key]['doors'].' '.$car[$key]['year'].'<br>';
+    echo '<br><br>CAR '.$key.'<br>';
+    foreach ($car[$key] as $kk => $ii) {
+        echo $ii.' ';
+    }
 }
+echo '<br><br><b>Вариант 2</b><br>';
+foreach ($car as $key => $item) {
+    echo '<br>CAR '.$key.'<br>'.$car[$key]['model'].' '.$car[$key]['speed'].' '.$car[$key]['doors'].' '.$car[$key]['year'].'<br>';
+}
+
+
 /*
 for ($i=0; $i <= 2 ; $i++) { 
 	echo '<br>CAR '.$car[$i];
