@@ -150,7 +150,17 @@ $opel = array(
     'year' => "2013",
 );
 //Объедините три массива в один многомерный массив
-$car = array($bmw, $toyota, $opel);
+/*$car['bmw'] = $bmw;
+$car['toyota'] = $toyota;
+$car['opel'] = $opel;*/
+
+$car = array
+(
+    'bmw' => $bmw,
+    'toyota' => $toyota,
+    'opel' => $opel,
+);
+
 echo '<pre>';
 print_r($car);
 echo '</pre>';
@@ -161,12 +171,15 @@ echo '</pre>';
 //CAR bmw
 //X5 ­120 ­ 5 ­ 2015 
 
-//var_dump($car);
-
-for ($i=0; $i <= 2 ; $i++) { 
-	echo '<br>CAR '.$car[$i]['name'].'<br>'.$car[$i]['model'].' '.$car[$i]['speed'].' '.$car[$i]['doors'].' '.$car[$i]['year'].'<br>';
+foreach ($car as $key => $item) {
+    echo 'CAR '.$key.'<br>'.$car[$key]['model'].' '.$car[$key]['speed'].' '.$car[$key]['doors'].' '.$car[$key]['year'].'<br>';
 }
-
+/*
+for ($i=0; $i <= 2 ; $i++) { 
+	echo '<br>CAR '.$car[$i];
+        //['name'].'<br>'.$car[$i]['model'].' '.$car[$i]['speed'].' '.$car[$i]['doors'].' '.$car[$i]['year'].'<br>';
+}
+*/
 /*
 echo '<br>CAR bmw<br>'.$bmw['model'].' '.$bmw['speed'].' '.$bmw['doors'].' '.$bmw['year'];
 echo '<br>CAR toyota<br>'.$toyota['model'].' '.$toyota['speed'].' '.$toyota['doors'].' '.$toyota['year']; 
