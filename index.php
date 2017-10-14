@@ -175,12 +175,12 @@ echo '<b>Вариант 1</b>';
 foreach ($car as $key => $item) {
     echo '<br><br>CAR '.$key.'<br>';
     foreach ($car[$key] as $kk => $ii) {
-        echo $ii.' ';
+        echo $ii . ' ';
     }
 }
 echo '<br><br><b>Вариант 2</b><br>';
 foreach ($car as $key => $item) {
-    echo '<br>CAR '.$key.'<br>'.$car[$key]['model'].' '.$car[$key]['speed'].' '.$car[$key]['doors'].' '.$car[$key]['year'].'<br>';
+    echo '<br>CAR ' . $key . '<br>' . $car[$key]['model'] . ' ' . $car[$key]['speed'] . ' ' . $car[$key]['doors'] . ' ' . $car[$key]['year'] . '<br>';
 }
 
 
