@@ -8,15 +8,13 @@ header('Content-type: text/html; charset=utf-8');
 $arr_str = array('str1', 'str2', 'str3', 'str4', 'str5');
 
 function task1($arr) {
-	foreach ($arr as $key => $value) {
-		echo '<p>'.$value.'</p>';
-	}
-	if (func_get_arg(1) == true) {
-		$back_to_str = implode(" : ", $arr);
-		//echo '<br>'.$back_to_str;
-		$arr = $back_to_str;
-		return $arr;
-	}
+    foreach ($arr as $key => $value) {
+        echo '<p>'.$value.'</p>';
+    }
+    if (func_get_arg(1) == true) {
+        $back_to_str = implode(" : ", $arr);
+        return $back_to_str;
+    }
 }
 
 //echo task1($arr_str, true);
@@ -31,19 +29,49 @@ function task1($arr) {
 // Функция должна вывести результат на экран.
 // Функция должна обрабатывать любой ввод, в том числе некорректный и выдавать сообщения об этом
 
-$arr_num = array(1,2,3,4);
-$sign = '+';
+$arr_num = array(15, 5, 4);
+$sign = '/';
 
 function task2($array, $sign) {
-    if ($sign == '+' || $sign == '-') {
+    if (preg_match('/[a-zA-Zа-яёА-ЯЁ]/u', implode("", $array))) {
+        echo "<br>Массив может содержать только цифры";        
+    } else {
+        if ($sign == '+') {
+            for ($i=0; $i < count($array); $i++) {
+                $result +=$array[$i];
+            }
+        } elseif ($sign == '-') {
+            for ($i=0; $i < count($array); $i++) {
+                $array[0] *= (-1);
+                $result -=$array[$i]; 
+            }
+        } elseif ($sign == '*') {
+            $result = 1;
+            for ($i=0; $i < count($array); $i++) {
+                $result *=$array[$i]; 
+            }
+        } elseif ($sign == '/') {
+            $result = $array[0];
+            for ($i=1; $i < count($array); $i++) {
+                if ($array[0] == 0 || $array[$i] == 0 ) {
+                    echo '<br>На ноль делить нельзя';
+                    break;
+                }
+                $result /=$array[$i];
+            }
+        } else {
+            echo "<br>Неверный знак";
+        }
+    }
+    /*if ($sign == '+' || $sign == '-') {
         $result = 0;
     } else {
         $result = 1; 
     }
     for ($i=0; $i < count($array); $i++) {
         if ($sign == '+') {
-        	$result += $array[$i];
-    	} elseif ($sign == '-') {
+            $result += $array[$i];
+        } elseif ($sign == '-') {
             $result -= $array[$i];    
         } elseif ($sign == '*') {
             $result *= $array[$i];    
@@ -55,7 +83,7 @@ function task2($array, $sign) {
             echo "<br>Неверный знак";
             if ($i == 0) break;
         }
-    }
+    }*/
     echo '<br>'.$result;
 }
 //task2($arr_num, $sign);
@@ -75,17 +103,54 @@ function task3() {
     echo "<br>Колличество аргументов :".$numargs;
 
     $sign_task3 = func_get_arg(0);
-    echo "<br>Знак :".func_get_arg(0);
+    echo "<br>Знак :".$sign_task3;
 
     $arg_list = func_get_args();
-     /*for ($i = 0; $i < $numargs; $i++) {
-         echo "Аргумент $i is: ".$arg_list[$i]."<br>\n";
-     }*/
+
     foreach ($arg_list as $key => $value) {
         echo "<br>".$key.'=>'.$value;
     }
 
+    if (preg_match('/[a-zA-Zа-яёА-ЯЁ]/u', implode("", $arg_list))) {
+        echo "<br>Массив может содержать только цифры";        
+    } else {
+        if ($sign_task3 == '+') {
+            for ($i=1; $i < $numargs; $i++) {
+                $result +=$arg_list[$i];
+                $formula_str .= $sign_task3.' '.$arg_list[$i].' ';
+            }
+        } elseif ($sign_task3 == '-') {
+            for ($i=1; $i < $numargs; $i++) {
+                $arg_list[1] *= (-1);
+                $result -=$arg_list[$i];
+                if ($i==1) {
+                    $arg_list[1] *= (-1);
+                }
+                $formula_str .= $sign_task3.' '.$arg_list[$i].' ';
+            }
+        } elseif ($sign_task3 == '*') {
+            $result = 1;
+            for ($i=1; $i < $numargs; $i++) {
+                $result *=$arg_list[$i]; 
+                $formula_str .= $sign_task3.' '.$arg_list[$i].' ';
+            }
+        } elseif ($sign_task3 == '/') {
+            $result = $arg_list[1];
+            for ($i=2; $i < $numargs; $i++) {
+                if ($arg_list[1] == 0 || $arg_list[$i] == 0 ) {
+                    echo '<br>На ноль делить нельзя';
+                    break;
+                }
+                $result /= $arg_list[$i];
+                //$formula_str = $arg_list[1];
+                $formula_str .= $arg_list[1].' '.$sign_task3.' '.$arg_list[$i].' ';
+            }
+        } else {
+            echo "<br>Неверный знак";
+        }
+    }
 
+/*
     if ($sign_task3 == '+' || $sign_task3 == '-') {
         $result = 0;
     } else {
@@ -110,23 +175,31 @@ function task3() {
             echo "<br>Неверный знак";
             if ($i == 0) break;
         }
-    }
+    }*/
 
     $str_arrr = explode(' ', $formula_str);
 
-    for ($i=1; $i<(count($str_arrr)-1); $i++) {
-        $itog .= $str_arrr[$i].' ';
-    }
-
-    echo '<br>'.$itog.'= '.$result;
-    /*
     echo '<pre>';
     print_r($str_arrr);
     echo '</pre>';
-    */
+
+    if ($sign_task3 == '/') {
+
+            for ($i=0; $i<(count($str_arrr)-1); $i++) {
+                
+                if (($i !==0 ) && ($i % 3 == 0)) continue;
+                $itog .= $str_arrr[$i].' ';
+            }
+        } else {
+            for ($i=1; $i<(count($str_arrr)-1); $i++) {
+                $itog .= $str_arrr[$i].' ';
+            }
+        }
+    
+    echo '<br>'.$itog.'= '.$result;
 }
 
-//task3('+', 1, 2, 3, 5.2);
+//task3('/', 1, 2, 3, 5.2);
 
 
 
@@ -167,50 +240,64 @@ function task4($num1, $num2) {
 
 function task5_1($str) {
     
-    $str = strtoupper(preg_replace("/\s/u", "", $str));
-    $arr1 = str_split($str);
-    
+    $str = mb_strtolower($str, 'utf-8');
+    //$str = preg_match('/[0-9a-zA-Zа-яёА-ЯЁ]/u', $str)
+    $str = preg_replace("/\s/", "", $str);
+    $str_arr = preg_split('//u',$str,-1,PREG_SPLIT_NO_EMPTY);
+    //$arr1 = str_split($rgTest);
+       
     echo '<pre>';
-    print_r($arr1);
-    echo '</pre>'.count($arr1);
+    print_r($str_arr);
+    echo '</pre>'.count($str_arr);
     
-    if (count($arr1) % 2 == 0) {
-        for ($i=0; $i<count($arr1); $i++) {
-            echo '<br>'.$arr1[$i].' = '.$arr1[count($arr1) - ($i+1)];
+        for ($i=0; $i<count($str_arr); $i++) {
+            echo '<br>'.$str_arr[$i].' = '.$str_arr[count($str_arr) - ($i+1)];
             
-            if ($arr1[$i] == $arr1[count($arr1) - ($i+1)]) {
+            if ($str_arr[$i] == $str_arr[count($str_arr) - ($i+1)]) {
                 $res_p = 1; 
             } else {
                 $res_p = 0;        
             }
             
         }
-    } else {
-        echo "<br>Четное кол-во симолов без пробелов нннадо";
-    }
 
     if ($res_p == 1) {
-        return 'true';
+        return true;
     } else {
-        return 'false'; 
+        return false; 
     } 
-    
 }
 
-function task5_2() {
-    echo '<br>'.task5_1('a b c cba');
+function task5_2($str_check) {
+    if (task5_1($str_check)) {
+        echo '<br>Строка палиндром';
+    } else {
+        echo '<br>Строка не палиндром';
+    }
 }
 
-//task5_2();
+//task5_2('3топот3');
 
 // Задание #6 (выполняется после вебинара “ВСТРОЕННЫЕ ВОЗМОЖНОСТИ ЯЗЫКА”)
 
 // Выведите информацию о текущей дате в формате 31.12.2016 23:59
-// Выведите unixtime время соответствующее 24.02.2016 00:00:00.
+
 
 function task6() {
     echo '<br>'.date('d.m.Y h:i');
-    echo '<br>'.date('d.m.Y h:i:s', time());
+
+// Выведите unixtime время соответствующее 24.02.2016 00:00:00.
+    $date = date_parse_from_format("d.m.Y", '24.02.2016 00:00:00');
+    $unixTime = mktime($date['hour'], 
+                       $date['minute'], 
+                       $date['second'], 
+                       $date['month'], 
+                       $date['day'], 
+                       $date['year']);
+    echo '<br>'.$unixTime;
+    echo '<pre>';
+    print_r(getdate($unixTime));
+    echo '</pre>';
 }
 //task6();
 
@@ -252,7 +339,7 @@ function task9_1() {
     fwrite($file, $text);
     fclose($file);
 }
-task9_1();
+//task9_1();
 
 function task9_2($file_name) {
     echo '<br>'.file_get_contents($file_name);
