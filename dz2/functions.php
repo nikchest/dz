@@ -33,6 +33,7 @@ $arr_num = array(15, 5, 4);
 $sign = '/';
 
 function task2($array, $sign) {
+    $result = ''; // переменная для вычисления итога
     if (preg_match('/[a-zA-Zа-яёА-ЯЁ]/u', implode("", $array))) {
         echo "<br>Массив может содержать только цифры";        
     } else {
@@ -111,6 +112,8 @@ function task3() {
         echo "<br>".$key.'=>'.$value;
     }
 
+    $result = ''; // переменная для вычисления итога
+    
     if (preg_match('/[a-zA-Zа-яёА-ЯЁ]/u', implode("", $arg_list))) {
         echo "<br>Массив может содержать только цифры";        
     } else {
@@ -239,7 +242,7 @@ function task4($num1, $num2) {
 // * Палиндром – строка, одинаково читающаяся в обоих направлениях.
 
 function task5_1($str) {
-    
+    $res_p = ''; //переменная для возврата тру, если слово палиндром
     $str = mb_strtolower($str, 'utf-8');
     //$str = preg_match('/[0-9a-zA-Zа-яёА-ЯЁ]/u', $str)
     $str = preg_replace("/\s/", "", $str);
