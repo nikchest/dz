@@ -1,3 +1,4 @@
+<?php
 class Car 
 {
 	public $speed; //скорость
